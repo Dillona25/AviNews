@@ -50,9 +50,6 @@ export const Navbar = (props: Props) => {
                   >
                     Saved Articles
                   </Link>
-                  <a className="text-center hidden lg:block mr-[42px]">
-                    Saved Flights
-                  </a>
                 </>
               ) : (
                 ""
@@ -66,12 +63,14 @@ export const Navbar = (props: Props) => {
                   Logout
                 </button>
               ) : (
-                <button
-                  onClick={props.handleSignInModal}
-                  className="hidden lg:block border-white border-[1px] py-3 w-40 rounded-full font-Roboto lg:text-[18px]"
-                >
-                  Sign in
-                </button>
+                <div className="flex gap-5">
+                  <button
+                    onClick={props.handleSignInModal}
+                    className="hidden lg:block border-white border-[1px] py-3 w-40 rounded-full font-Roboto lg:text-[18px]"
+                  >
+                    Sign in
+                  </button>
+                </div>
               )}
               {props.isLoggedIn ? (
                 <img
