@@ -28,6 +28,8 @@ import {
 import { LogoutConfirmModal } from "./LogoutConfirmModal/LogoutConfirmModal";
 import { useCurrentUser } from "../store/currentUserContext";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
+import { FlightSearchModal } from "./FlightSearchModal/FlightSearchModal";
+import { getDepartureData } from "../utils/flightDataApi";
 
 type GetArticlesParams = {
   fromDate: string;
@@ -95,6 +97,10 @@ function App() {
 
   const handleLogoutConfirm = () => {
     setActiveModal("logoutConfirm");
+  };
+
+  const handleFlightSearchModal = () => {
+    setActiveModal("FlightSearch");
   };
 
   const handleArticlesConflictError = () => {
@@ -212,6 +218,10 @@ function App() {
       .catch(console.error);
   };
 
+  const handleSearchDepartures = (airportCode: string) => {
+    getDepartureData(airportCode);
+  };
+
   return (
     <Router>
       <Routes>
@@ -237,8 +247,10 @@ function App() {
                     handleLogoutConfirm={handleLogoutConfirm}
                   />
                 )}
-                {/* @ts-expect-error ignore error, error is not crucial */}
-                <Hero handleSearch={handleSearch} />
+                <Hero
+                  handleSearch={handleSearch}
+                  handleFlightSearchModal={handleFlightSearchModal}
+                />
               </div>
               {/* These will only appear for the user when they search and get
               results */}
@@ -288,6 +300,12 @@ function App() {
                   closeModal={closeModal}
                   setIsLoggedIn={setIsLoggedIn}
                   setCurrentUser={setCurrentUser}
+                />
+              )}
+              {activeModal === "FlightSearch" && (
+                <FlightSearchModal
+                  closeModal={closeModal}
+                  handleSearchDepartures={handleSearchDepartures}
                 />
               )}
             </div>
