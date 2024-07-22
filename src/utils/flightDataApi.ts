@@ -10,7 +10,7 @@ interface Airport {
 // Gets all flight data for departures for a given airport code
 export const getDepartureData = (airportCode: string): Promise<Airport[]> => {
   return fetch(
-    `https://aviation-edge.com/v2/public/timetable?key=${API_KEY_AVI_EDGE}&iataCode=${airportCode}&type=departure`,
+    `https://aviation-edge.com/v2/public/routes?key=${API_KEY_AVI_EDGE}&departureIata=${airportCode}`,
     {
       method: "GET",
       headers: {
@@ -31,7 +31,7 @@ export const getDepartureData = (airportCode: string): Promise<Airport[]> => {
 // Gets all flight data for arrivals for a given airport code
 export const getArrivalData = (airportCode: string): Promise<Airport[]> => {
   return fetch(
-    `https://aviation-edge.com/v2/public/timetable?key=${API_KEY_AVI_EDGE}&iataCode=${airportCode}&type=arrival`,
+    `https://aviation-edge.com/v2/public/routes?key=${API_KEY_AVI_EDGE}&arrivalIata=${airportCode}`,
     {
       method: "GET",
       headers: {

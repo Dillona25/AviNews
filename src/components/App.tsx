@@ -29,7 +29,7 @@ import { LogoutConfirmModal } from "./LogoutConfirmModal/LogoutConfirmModal";
 import { useCurrentUser } from "../store/currentUserContext";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 import { FlightSearchModal } from "./FlightSearchModal/FlightSearchModal";
-import { getDepartureData } from "../utils/flightDataApi";
+import { getArrivalData, getDepartureData } from "../utils/flightDataApi";
 
 type GetArticlesParams = {
   fromDate: string;
@@ -97,10 +97,6 @@ function App() {
 
   const handleLogoutConfirm = () => {
     setActiveModal("logoutConfirm");
-  };
-
-  const handleFlightSearchModal = () => {
-    setActiveModal("FlightSearch");
   };
 
   const handleArticlesConflictError = () => {
@@ -218,8 +214,10 @@ function App() {
       .catch(console.error);
   };
 
+  // Calling API endpoints to get flight data
   const handleSearchDepartures = (airportCode: string) => {
     getDepartureData(airportCode);
+    getArrivalData(airportCode);
   };
 
   return (
@@ -249,7 +247,7 @@ function App() {
                 )}
                 <Hero
                   handleSearch={handleSearch}
-                  handleFlightSearchModal={handleFlightSearchModal}
+                  handleSearchDepartures={handleSearchDepartures}
                 />
               </div>
               {/* These will only appear for the user when they search and get
@@ -300,12 +298,6 @@ function App() {
                   closeModal={closeModal}
                   setIsLoggedIn={setIsLoggedIn}
                   setCurrentUser={setCurrentUser}
-                />
-              )}
-              {activeModal === "FlightSearch" && (
-                <FlightSearchModal
-                  closeModal={closeModal}
-                  handleSearchDepartures={handleSearchDepartures}
                 />
               )}
             </div>
