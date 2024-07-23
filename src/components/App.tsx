@@ -28,7 +28,6 @@ import {
 import { LogoutConfirmModal } from "./LogoutConfirmModal/LogoutConfirmModal";
 import { useCurrentUser } from "../store/currentUserContext";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
-import { FlightSearchModal } from "./FlightSearchModal/FlightSearchModal";
 import { getArrivalData, getDepartureData } from "../utils/flightDataApi";
 import { FlightTable } from "./FlightTable/FlightTable";
 
@@ -79,8 +78,6 @@ function App() {
   const [savedNewsArticles, setSavedNewsArticles] = useState<Article[]>([]);
   const [_selectedArticleid, setSelectedArticleId] = useState(null);
   const { setCurrentUser } = useCurrentUser();
-  const [departures, setDepartures] = useState([]);
-  const [arrivals, setArrivals] = useState([]);
 
   const handleNavMenu = () => {
     setActiveModal("navMenu");

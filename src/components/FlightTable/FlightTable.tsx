@@ -23,11 +23,11 @@ export const FlightTable = () => {
           </thead>
           <tbody>
             <tr className="text-center font-Roboto">
-              <td className="py-2 px-4 border-b">8:30</td>
-              <td className="py-2 px-4 border-b">Alaska</td>
-              <td className="py-2 px-4 border-b">HY67H</td>
-              <td className="py-2 px-4 border-b">PDX</td>
-              <td className="py-2 px-4 border-b">LAX</td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
             </tr>
           </tbody>
         </table>
@@ -52,11 +52,11 @@ export const FlightTable = () => {
           </thead>
           <tbody>
             <tr className="text-center">
-              <td className="py-2 px-4 border-b">8:30</td>
-              <td className="py-2 px-4 border-b">Alaska</td>
-              <td className="py-2 px-4 border-b">HY67H</td>
-              <td className="py-2 px-4 border-b">PDX</td>
-              <td className="py-2 px-4 border-b">LAX</td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
+              <td className="py-2 px-4 border-b"></td>
             </tr>
           </tbody>
         </table>

@@ -25,6 +25,10 @@ export const getDepartureData = (airportCode: string): Promise<Airport[]> => {
       }
       return response.json();
     })
+    .then((data) => {
+      console.log("Departure Data:", data);
+      return data;
+    })
     .then(processServerRes);
 };
 
@@ -45,6 +49,10 @@ export const getArrivalData = (airportCode: string): Promise<Airport[]> => {
         throw new Error("Network response was not ok");
       }
       return response.json();
+    })
+    .then((data) => {
+      console.log("Departure Data:", data);
+      return data;
     })
     .then(processServerRes);
 };
