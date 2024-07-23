@@ -30,6 +30,7 @@ import { useCurrentUser } from "../store/currentUserContext";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 import { FlightSearchModal } from "./FlightSearchModal/FlightSearchModal";
 import { getArrivalData, getDepartureData } from "../utils/flightDataApi";
+import { FlightTable } from "./FlightTable/FlightTable";
 
 type GetArticlesParams = {
   fromDate: string;
@@ -78,6 +79,8 @@ function App() {
   const [savedNewsArticles, setSavedNewsArticles] = useState<Article[]>([]);
   const [_selectedArticleid, setSelectedArticleId] = useState(null);
   const { setCurrentUser } = useCurrentUser();
+  const [departures, setDepartures] = useState([]);
+  const [arrivals, setArrivals] = useState([]);
 
   const handleNavMenu = () => {
     setActiveModal("navMenu");
@@ -252,6 +255,7 @@ function App() {
               </div>
               {/* These will only appear for the user when they search and get
               results */}
+              <FlightTable />
               {searchResults === false && isLoading === false && (
                 <NoSearchYet />
               )}
