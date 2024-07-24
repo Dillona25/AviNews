@@ -1,4 +1,5 @@
 import { NEWS_BASE_URL } from "./constants";
+import { processServerResponse } from "./processServerResponse";
 
 // Types for each parameter that we have for the request
 type GetArticlesParams = {
@@ -6,12 +7,6 @@ type GetArticlesParams = {
   toDate: string;
   pageSize: number;
   userInput?: string;
-};
-
-export const processServerRes = (res: Response) => {
-  if (res.ok) {
-    return res.json();
-  }
 };
 
 // Search query in which does its best to condense the user input to aviation articles related to their input
@@ -34,5 +29,5 @@ export const getArticles = ({
         authorization: ApiKey,
       }
     }`
-  ).then(processServerRes);
+  ).then(processServerResponse);
 };

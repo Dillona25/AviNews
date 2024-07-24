@@ -14,7 +14,7 @@ import { SavedArticles } from "../routes/SavedArticles/SavedArticles";
 import { ProfileModal } from "./ProfileModal/ProfileModal";
 import { PreLoader } from "./PreLoader/PreLoader";
 import { NotFound } from "./NotFound/Notfound";
-import { getArticles, processServerRes } from "../utils/newsApi";
+import { getArticles } from "../utils/newsApi";
 import { NoSearchYet } from "./NoSearchYet/NoSearchYet";
 import useEscapeKey from "../hooks/useEscapeKey";
 import { ArticleError } from "./ArticlesError/ArticlesError";
@@ -28,8 +28,9 @@ import {
 import { LogoutConfirmModal } from "./LogoutConfirmModal/LogoutConfirmModal";
 import { useCurrentUser } from "../store/currentUserContext";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
-import { getArrivalData, getDepartureData } from "../utils/flightDataApi";
+import { fetchDepartureData, fetchArrivalData } from "../utils/flightDataApi";
 import { FlightTable } from "./FlightTable/FlightTable";
+import { processServerResponse } from "../utils/processServerResponse";
 
 type GetArticlesParams = {
   fromDate: string;
@@ -78,6 +79,7 @@ function App() {
   const [savedNewsArticles, setSavedNewsArticles] = useState<Article[]>([]);
   const [_selectedArticleid, setSelectedArticleId] = useState(null);
   const { setCurrentUser } = useCurrentUser();
+  const [flightTables, setFlightTables] = useState(false);
 
   const handleNavMenu = () => {
     setActiveModal("navMenu");
@@ -195,7 +197,7 @@ function App() {
 
   const handleSaveArticle = (card: Article) => {
     saveArticle(card)
-      .then(processServerRes)
+      .then(processServerResponse)
       .then(({ data }) => {
         setSavedNewsArticles([...savedNewsArticles, data]);
         setSelectedArticleId(data._id);
@@ -216,8 +218,9 @@ function App() {
 
   // Calling API endpoints to get flight data
   const handleSearchDepartures = (airportCode: string) => {
-    getDepartureData(airportCode);
-    getArrivalData(airportCode);
+    fetchDepartureData(airportCode);
+    fetchArrivalData(airportCode);
+    setFlightTables(true);
   };
 
   return (
@@ -252,10 +255,10 @@ function App() {
               </div>
               {/* These will only appear for the user when they search and get
               results */}
-              <FlightTable />
-              {searchResults === false && isLoading === false && (
-                <NoSearchYet />
-              )}
+              {flightTables && <FlightTable />}
+              {searchResults === false &&
+                flightTables === false &&
+                isLoading === false && <NoSearchYet />}
               {searchedArticles && cardsData.length > 0 && (
                 <SearchArticles
                   isLoggedIn={isLoggedIn}

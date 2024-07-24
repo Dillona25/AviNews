@@ -1,5 +1,5 @@
 import { BASE_URL } from "./constants";
-import { processServerRes } from "./newsApi";
+import { processServerResponse } from "./processServerResponse";
 
 type registrationProps = {
   email: string;
@@ -27,7 +27,7 @@ export const registration = ({
     },
     body: JSON.stringify({ name, avatar, email, password }),
   })
-    .then(processServerRes)
+    .then(processServerResponse)
     .catch((err) => {
       console.log(err);
       throw err;
@@ -43,7 +43,7 @@ export const authorize = ({ email, password }: authorizeProps) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then(processServerRes)
+    .then(processServerResponse)
     .catch((err) => {
       console.log(err);
       throw err;
@@ -59,7 +59,7 @@ export const checkToken = (token: string) => {
       authorization: `Bearer ${token}`,
     },
   })
-    .then(processServerRes)
+    .then(processServerResponse)
     .catch((err) => {
       console.log(err);
       throw err;

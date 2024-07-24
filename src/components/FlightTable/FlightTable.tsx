@@ -1,6 +1,6 @@
 export const FlightTable = () => {
   return (
-    <section className="py-8">
+    <section className="py-8 bg-[#f5f6f7]">
       <div className=" max-w-[1600px] m-auto flex flex-col sm:flex-row sm:justify-evenly">
         {/* Departure Table */}
         <table className="w-[45%] bg-white border border-gray-200">

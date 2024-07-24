@@ -1,6 +1,6 @@
 import { Article } from "../components/App";
 import { BASE_URL } from "./constants";
-import { processServerRes } from "./newsApi";
+import { processServerResponse } from "./processServerResponse";
 
 type updateUserProps = {
   name: string;
@@ -19,7 +19,7 @@ export const updateUser = ({ name, avatar }: updateUserProps) => {
       name,
       avatar,
     }),
-  }).then(processServerRes);
+  }).then(processServerResponse);
 };
 
 export const getSavedArticles = (token: string) => {
@@ -29,7 +29,7 @@ export const getSavedArticles = (token: string) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then(processServerRes);
+  }).then(processServerResponse);
 };
 
 export const saveArticle = ({
@@ -66,5 +66,5 @@ export const deleteSaveArticles = (articleId: string, token: string) => {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ articleId }),
-  }).then(processServerRes);
+  }).then(processServerResponse);
 };
