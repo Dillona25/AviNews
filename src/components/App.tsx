@@ -28,7 +28,11 @@ import {
 import { LogoutConfirmModal } from "./LogoutConfirmModal/LogoutConfirmModal";
 import { useCurrentUser } from "../store/currentUserContext";
 import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
-import { fetchDepartureData, fetchArrivalData } from "../utils/flightDataApi";
+import {
+  fetchDepartureData,
+  fetchArrivalData,
+  displayRoute,
+} from "../utils/flightDataApi";
 import { FlightTable } from "./FlightTable/FlightTable";
 import { processServerResponse } from "../utils/processServerResponse";
 
@@ -66,6 +70,14 @@ type UpdateUserProps = {
   name: string;
   avatar: string;
 };
+
+export interface Flight {
+  departureTime: string;
+  airline: string;
+  flight: string;
+  origin: string;
+  destination: string;
+}
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -218,8 +230,12 @@ function App() {
 
   // Calling API endpoints to get flight data
   const handleSearchDepartures = (airportCode: string) => {
-    fetchDepartureData(airportCode);
-    fetchArrivalData(airportCode);
+    fetchDepartureData(airportCode).then((data) => {
+      data.forEach((route: any) => {
+        displayRoute(route);
+        console.log("----------------------");
+      });
+    });
     setFlightTables(true);
   };
 
