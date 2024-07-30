@@ -1,0 +1,14 @@
+Thursday 24th:
+
+1. Response is being sent as a list of objects which is what we want
+
+    - Find a way to itterate over these objects and update the table.
+
+        - This is how the git repo is parsing the data 
+
+            ```console.log(`Flight No: ${route.flightNumber}`);
+                console.log(`From ${route.departureIata} (${route.departureTime}) to ${route.arrivalIata} (${route.arrivalTime})`);
+                console.log(`Airlines: ${route.airlineIata}`);
+                console.log(`Registration Numbers: ${route.regNumber}`);```
+
+    - Worth noting we might not even need to use a state variable. Might be able to create the API fetchs with Axios in the flight table component           

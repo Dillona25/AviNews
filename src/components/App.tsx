@@ -71,14 +71,6 @@ type UpdateUserProps = {
   avatar: string;
 };
 
-export interface Flight {
-  departureTime: string;
-  airline: string;
-  flight: string;
-  origin: string;
-  destination: string;
-}
-
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -233,9 +225,15 @@ function App() {
     fetchDepartureData(airportCode).then((data) => {
       data.forEach((route: any) => {
         displayRoute(route);
-        console.log("----------------------");
       });
     });
+
+    fetchArrivalData(airportCode).then((data) => {
+      data.forEach((route: any) => {
+        displayRoute(route);
+      });
+    });
+
     setFlightTables(true);
   };
 
